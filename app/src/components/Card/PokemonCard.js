@@ -50,37 +50,39 @@ const Container = styled.div`
  * A component to display pokemon details on card.
  * @param  {Object} {searchResults}
  */
-const PokemonCard = ({ searchResults }) => {
-  const [saveList, setSaveList] = useState(
-    getLocalStorageItem("savePokemonIds") || []
-  );
+const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons }) => {
+  const { id, abilities, name, sprites } = pokemon;
 
-  const {
-    id,
-    abilities,
-    name,
-    sprites: { front_default },
-  } = searchResults;
-
-  const handlePokemonSave = (id) => {
-    setSaveList([...saveList, id]);
-    saveToLocalStorage("savePokemonIds", [...saveList, id]);
+  const handlePokemonSave = (pokemonObj) => {
+    setSavedPokemons([...savedPokemons, pokemonObj]);
+    saveToLocalStorage("savedPokemons", [...savedPokemons, pokemonObj]);
   };
 
+  console.log("Card");
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Container>
         <div>
-          <img src={front_default} alt={name} />
+          <img src={sprites.front_default} alt={name} />
         </div>
         <div>
           <h6>Name</h6>
           <p>
             {name}
-            {saveList.includes(id) ? (
+            {savedPokemons.filter((poke) => poke.id === id).length > 0 ? (
               <StarIcon w={8} h={8} />
             ) : (
-              <Button size="md" onClick={() => handlePokemonSave(id)}>
+              <Button
+                size="md"
+                onClick={() =>
+                  handlePokemonSave({
+                    id,
+                    name,
+                    abilities,
+                    sprites: { front_default: sprites.front_default },
+                  })
+                }
+              >
                 Save
               </Button>
             )}
