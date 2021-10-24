@@ -22,12 +22,11 @@ function App() {
       const results = await fetchData(
         `https://pokeapi.co/api/v2/pokemon/${searchString}?limit=10`
       );
-
       setSearchResults(results);
-      setIsLoading(false);
     };
 
     if (searchString) getPokeDexData(searchString);
+    setIsLoading(false);
   }, [searchString]);
 
   /**
@@ -36,13 +35,19 @@ function App() {
    */
   const debouncedSearch = useCallback(
     debounce((searchValue) => {
-      setIsLoading(true);
-      setSearchString(searchValue);
-    }, 2000),
+      if (searchValue) {
+        setIsLoading(true);
+        setSearchString(searchValue);
+      } else {
+        setIsLoading(false);
+        setSearchString("");
+        setSearchResults([]);
+      }
+    }, 900),
     []
   );
 
-  console.log("render", searchResults);
+  console.log("render", "APP");
   return (
     <>
       <Layout
@@ -54,8 +59,7 @@ function App() {
             Object.keys(searchResults).length > 0 &&
             !searchResults.hasOwnProperty("text") ? (
             <PokemonCard searchResults={searchResults} />
-          ) : searchResults.hasOwnProperty("text") &&
-            searchResults.text === "not found" ? (
+          ) : searchString && searchResults.text === "not found" ? (
             <ResultNotFound />
           ) : null
         }
