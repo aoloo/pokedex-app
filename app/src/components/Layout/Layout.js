@@ -17,7 +17,7 @@ const Layout = (props) => {
 
   return (
     <>
-      <SimpleGrid gap={3}>
+      <SimpleGrid gap={4}>
         <GridItem>
           <Box>
             <Button
