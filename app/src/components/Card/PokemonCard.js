@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState, memo } from "react";
 import styled from "styled-components";
+import { StarIcon } from "@chakra-ui/icons";
 
 //@dependencies
 import { Box } from "@chakra-ui/layout";
-import { Tag, TagLabel } from "@chakra-ui/react";
+import { Tag, TagLabel, Button } from "@chakra-ui/react";
+
+//@util functions
+import { getLocalStorageItem, saveToLocalStorage } from "../../utils/utils";
 
 //@Custom styled components
 const Container = styled.div`
@@ -15,10 +19,23 @@ const Container = styled.div`
     padding: 4px; 6px;
     color: grey
   }
+
+  svg {
+    float: right;
+    margin-right: 10px;
+    color: #e1e150e0;
+    font-size: 20px
+  }
+
   p {
     font-weight: 500;
     padding: 4px; 6px;
     font-size: 20px;
+    
+    button {
+      float: right;
+      margin-right: 10px
+    }
   }
 
   img {
@@ -34,11 +51,21 @@ const Container = styled.div`
  * @param  {Object} {searchResults}
  */
 const PokemonCard = ({ searchResults }) => {
+  const [saveList, setSaveList] = useState(
+    getLocalStorageItem("savePokemonIds") || []
+  );
+
   const {
+    id,
     abilities,
     name,
     sprites: { front_default },
   } = searchResults;
+
+  const handlePokemonSave = (id) => {
+    setSaveList([...saveList, id]);
+    saveToLocalStorage("savePokemonIds", [...saveList, id]);
+  };
 
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -48,7 +75,16 @@ const PokemonCard = ({ searchResults }) => {
         </div>
         <div>
           <h6>Name</h6>
-          <p>{name}</p>
+          <p>
+            {name}
+            {saveList.includes(id) ? (
+              <StarIcon w={8} h={8} />
+            ) : (
+              <Button size="md" onClick={() => handlePokemonSave(id)}>
+                Save
+              </Button>
+            )}
+          </p>
         </div>
         <div>
           <h6>Abilities</h6>

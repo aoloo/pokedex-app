@@ -5,11 +5,18 @@ const fetchData = async (endpoint) => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (e) {
     return { text: "not found" };
   }
+};
+
+const getLocalStorageItem = (name) => {
+  if (localStorage.getItem(name)) return JSON.parse(localStorage.getItem(name));
+};
+
+const saveToLocalStorage = (name, item) => {
+  localStorage.setItem(name, JSON.stringify(item));
 };
 
 /**
@@ -22,4 +29,4 @@ const getPokeDexData = async (searchString) => {
   );
 };
 
-export { fetchData, getPokeDexData };
+export { fetchData, getPokeDexData, getLocalStorageItem, saveToLocalStorage };
