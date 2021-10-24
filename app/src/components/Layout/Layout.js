@@ -1,11 +1,11 @@
 import React from "react";
 
 //@Third party library
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { SimpleGrid, Grid, GridItem, Container } from "@chakra-ui/react";
+import { SimpleGrid, GridItem } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 
 /**
@@ -40,9 +40,9 @@ const Layout = (props) => {
             margin="auto"
             flexDirection="column"
             justifyContent="center"
-            width={"50%"}
+            width={"450px"}
           >
-            <Box w="100%">{props.search}</Box>
+            <Box>{props.renderSearch()}</Box>
           </Flex>
         </GridItem>
         <GridItem alignItems="center">
@@ -51,11 +51,9 @@ const Layout = (props) => {
             margin="auto"
             flexDirection="column"
             justifyContent="center"
-            width={"70%"}
+            width={"450px"}
           >
-            <Box>
-              <main>allan</main>
-            </Box>
+            <Box>{props.renderCard()}</Box>
           </Flex>
         </GridItem>
       </SimpleGrid>
