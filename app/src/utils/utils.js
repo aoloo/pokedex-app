@@ -8,8 +8,7 @@ const fetchData = async (endpoint) => {
     console.log(data);
     return data;
   } catch (e) {
-    return [];
-    console.log(e);
+    return { text: "not found" };
   }
 };
 
@@ -17,8 +16,10 @@ const fetchData = async (endpoint) => {
  * executes fetch request to pokedex api.
  * @param  {String} searchString
  */
-const getPokeDexData = (searchString) => {
-  fetchData(`https://pokeapi.co/api/v2/pokemon/${searchString}?limit=10`);
+const getPokeDexData = async (searchString) => {
+  return await fetchData(
+    `https://pokeapi.co/api/v2/pokemon/${searchString}?limit=10`
+  );
 };
 
 export { fetchData, getPokeDexData };

@@ -1,23 +1,33 @@
 //@dependencies
 import React, { useState, useCallback, useEffect } from "react";
 import debounce from "lodash.debounce";
+import { Skeleton } from "@chakra-ui/react";
 
 //@util functions
-import { fetchData, getPokeDexData } from "./utils/utils";
+import { fetchData } from "./utils/utils";
 
 //@components
 import Layout from "./components/Layout/Layout";
 import Search from "./components/Search/Search";
-import ResultList from "./components/Display/ResultList";
+import PokemonCard from "./components/Card/PokemonCard";
+import ResultNotFound from "./components/Display/ResultNotFound";
 
 function App() {
   const [searchString, setSearchString] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (searchString) {
-      setSearchResults(getPokeDexData(searchString));
-    }
+    const getPokeDexData = async (searchString) => {
+      const results = await fetchData(
+        `https://pokeapi.co/api/v2/pokemon/${searchString}?limit=10`
+      );
+
+      setSearchResults(results);
+      setIsLoading(false);
+    };
+
+    if (searchString) getPokeDexData(searchString);
   }, [searchString]);
 
   /**
@@ -25,19 +35,29 @@ function App() {
    * @param  {Object} e
    */
   const debouncedSearch = useCallback(
-    debounce((searchValue) => setSearchString(searchValue), 1500),
+    debounce((searchValue) => {
+      setIsLoading(true);
+      setSearchString(searchValue);
+    }, 2000),
     []
   );
 
-  console.log("render");
+  console.log("render", searchResults);
   return (
     <>
       <Layout
-        search={
-          <Search
-            debouncedSearch={debouncedSearch}
-            renderesults={<ResultList searchResults={searchResults} />}
-          />
+        renderSearch={() => <Search debouncedSearch={debouncedSearch} />}
+        renderCard={() =>
+          isLoading ? (
+            <Skeleton h={300} />
+          ) : !isLoading &&
+            Object.keys(searchResults).length > 0 &&
+            !searchResults.hasOwnProperty("text") ? (
+            <PokemonCard searchResults={searchResults} />
+          ) : searchResults.hasOwnProperty("text") &&
+            searchResults.text === "not found" ? (
+            <ResultNotFound />
+          ) : null
         }
       />
     </>

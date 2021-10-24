@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import { Input } from "@chakra-ui/input";
 
+/**
+ * Displays a search component.
+ * @param  {Function} {debouncedSearch}
+ */
 const Search = ({ debouncedSearch }) => {
   const [value, setValue] = useState("");
 
