@@ -11,6 +11,7 @@ import {
 //@components
 import PokemonCard from "../Card/PokemonCard";
 
+//Renders saved pokemon cards
 const PokemonDrawer = memo(
   ({ isOpen, onClose, savedPokemons, setSavedPokemons }) => {
     console.log("RESULTS", savedPokemons);
@@ -30,6 +31,7 @@ const PokemonDrawer = memo(
                     savedPokemons={savedPokemons}
                     pokemon={pokemon}
                     setSavedPokemons={setSavedPokemons}
+                    view={"drawer"}
                   />
                 </div>
               ))}

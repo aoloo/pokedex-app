@@ -11,12 +11,21 @@ const fetchData = async (endpoint) => {
   }
 };
 
-const getLocalStorageItem = (name) => {
-  if (localStorage.getItem(name)) return JSON.parse(localStorage.getItem(name));
+/**
+ * Gets item from localstorage based by key.
+ * @param  {} key
+ */
+const getLocalStorageItem = (key) => {
+  if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
 };
 
-const saveToLocalStorage = (name, item) => {
-  localStorage.setItem(name, JSON.stringify(item));
+/**
+ * Saves item to localstorage.
+ * @param  {String} key
+ * @param  {Int | Number | Object} item
+ */
+const saveToLocalStorage = (key, item) => {
+  localStorage.setItem(key, JSON.stringify(item));
 };
 
 /**
