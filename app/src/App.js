@@ -52,6 +52,9 @@ function App() {
     []
   );
 
+  /**
+   * Drawer click event listener.
+   */
   const handleClick = () => {
     onOpen();
   };
@@ -97,6 +100,7 @@ function App() {
               pokemon={searchResults}
               savedPokemons={savedPokemons}
               setSavedPokemons={setSavedPokemons}
+              view={"default"}
             />
           ) : searchString && searchResults.text === "not found" ? (
             <ResultNotFound />

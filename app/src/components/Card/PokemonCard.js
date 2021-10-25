@@ -1,13 +1,15 @@
 import React, { useState, memo } from "react";
 import styled from "styled-components";
-import { StarIcon } from "@chakra-ui/icons";
 
 //@dependencies
 import { Box } from "@chakra-ui/layout";
-import { Tag, TagLabel, Button } from "@chakra-ui/react";
+import { Tag, TagLabel } from "@chakra-ui/react";
 
 //@util functions
-import { getLocalStorageItem, saveToLocalStorage } from "../../utils/utils";
+import { saveToLocalStorage } from "../../utils/utils";
+
+//@Components
+import CardActions from "./CardActions";
 
 //@Custom styled components
 const Container = styled.div`
@@ -20,21 +22,23 @@ const Container = styled.div`
     color: grey
   }
 
-  svg {
-    float: right;
-    margin-right: 10px;
-    color: #e1e150e0;
-    font-size: 20px
-  }
+  div.actions__section {
+   display: flex;
 
-  p {
+    p {
     font-weight: 500;
     padding: 4px; 6px;
     font-size: 20px;
-    
+    }
     button {
-      float: right;
+      margin-left: auto;
       margin-right: 10px
+    }
+
+    svg {
+      margin-left: auto;
+      margin-right: 10px;
+      font-size: 20px;
     }
   }
 
@@ -50,15 +54,30 @@ const Container = styled.div`
  * A component to display pokemon details on card.
  * @param  {Object} {searchResults}
  */
-const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons }) => {
-  const { id, abilities, name, sprites } = pokemon;
+const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons, view }) => {
+  const { abilities, name, sprites } = pokemon;
 
+  /**
+   * Save pokemon obj detail to localstorage.
+   * @param  {Object} pokemonObj
+   */
   const handlePokemonSave = (pokemonObj) => {
     setSavedPokemons([...savedPokemons, pokemonObj]);
     saveToLocalStorage("savedPokemons", [...savedPokemons, pokemonObj]);
   };
 
-  console.log("Card");
+  /**
+   * Removes saved pokemon by id.
+   * @param  {Array} savedPokemons
+   * @param  {int} id
+   */
+  const handlePokemonDelete = (savedPokemons, id) => {
+    const filteredPokemonList = savedPokemons.filter((poke) => poke.id !== id);
+
+    setSavedPokemons([...filteredPokemonList]);
+    saveToLocalStorage("savedPokemons", [...filteredPokemonList]);
+  };
+
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Container>
@@ -67,26 +86,16 @@ const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons }) => {
         </div>
         <div>
           <h6>Name</h6>
-          <p>
-            {name}
-            {savedPokemons.filter((poke) => poke.id === id).length > 0 ? (
-              <StarIcon w={8} h={8} />
-            ) : (
-              <Button
-                size="md"
-                onClick={() =>
-                  handlePokemonSave({
-                    id,
-                    name,
-                    abilities,
-                    sprites: { front_default: sprites.front_default },
-                  })
-                }
-              >
-                Save
-              </Button>
-            )}
-          </p>
+          <div className="actions__section">
+            <p>{name}</p>
+            <CardActions
+              savedPokemons={savedPokemons}
+              handlePokemonSave={handlePokemonSave}
+              handlePokemonDelete={handlePokemonDelete}
+              pokemon={pokemon}
+              view={view}
+            />
+          </div>
         </div>
         <div>
           <h6>Abilities</h6>
