@@ -1,13 +1,13 @@
 # Pokedex Cards
 A pokemon search based application for viewing pokemon characters. Users are able to save and delete their favorite pokemon cards.
 
-## Framework
+### Framework
 - [React](https://reactjs.org/)
 
 ### Component Library
 - [Chakra UI](https://chakra-ui.com/)
 
-### API
+### API 
 -  [pokedexAPI](https://pokeapi.co/)
 
 ### Project Structure 
@@ -36,9 +36,9 @@ A pokemon search based application for viewing pokemon characters. Users are abl
 ### Demo
 
 ### Running Locally
-  `cd app`
-  `npm install`
-  `npm run start`
+  - `cd app`
+  - `npm install`
+  - `npm run start`
   
 ### Authors 
 - Allan Oloo
