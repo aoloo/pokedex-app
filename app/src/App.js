@@ -1,5 +1,6 @@
-//@dependencies
 import React, { useState, useCallback, useEffect } from "react";
+
+//@dependencies
 import debounce from "lodash.debounce";
 import { Skeleton, Text, useDisclosure } from "@chakra-ui/react";
 

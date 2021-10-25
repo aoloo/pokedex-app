@@ -1,6 +1,8 @@
 import React, { memo } from "react";
+
+//@dependencies
 import { StarIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
-import { Button } from "@chakra-ui/react";
+import { Button, Alert, AlertIcon } from "@chakra-ui/react";
 
 //Renders pokemon card action buttons
 export default memo(function CardActions({
@@ -10,7 +12,7 @@ export default memo(function CardActions({
   pokemon,
   view,
 }) {
-  const { id, abilities, name, sprites } = pokemon;
+  const { id, abilities, name, sprites, types } = pokemon;
 
   return (
     <>
@@ -27,6 +29,7 @@ export default memo(function CardActions({
                   name,
                   abilities,
                   sprites: { front_default: sprites.front_default },
+                  types,
                 })
               }
               leftIcon={<AddIcon color={"blackAlpha.300"} />}
