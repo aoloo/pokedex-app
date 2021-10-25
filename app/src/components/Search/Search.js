@@ -1,6 +1,8 @@
 //@dependencies
 import React, { useState } from "react";
 import { Input } from "@chakra-ui/input";
+import { Stack, InputLeftElement, InputGroup } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 
 /**
  * Displays a search component.
@@ -21,14 +23,19 @@ const Search = ({ debouncedSearch }) => {
   };
 
   return (
-    <>
-      <Input
-        placeholder="Search Pokemon"
-        size="lg"
-        value={value}
-        onChange={handleSearchChange}
-      />
-    </>
+    <Stack>
+      <InputGroup>
+        <InputLeftElement
+          children={<SearchIcon verticalAlign="middle" marginTop="10px" />}
+        />
+        <Input
+          placeholder="Search by name or number"
+          size="lg"
+          value={value}
+          onChange={handleSearchChange}
+        />
+      </InputGroup>
+    </Stack>
   );
 };
 

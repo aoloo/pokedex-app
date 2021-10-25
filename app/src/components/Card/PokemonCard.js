@@ -55,7 +55,7 @@ const Container = styled.div`
  * @param  {Object} {searchResults}
  */
 const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons, view }) => {
-  const { abilities, name, sprites } = pokemon;
+  const { abilities, name, sprites, types } = pokemon;
 
   /**
    * Save pokemon obj detail to localstorage.
@@ -101,6 +101,22 @@ const PokemonCard = ({ pokemon, savedPokemons, setSavedPokemons, view }) => {
           <h6>Abilities</h6>
           <div>
             {abilities.map(({ ability: { name }, slot }) => (
+              <Tag
+                size={"md"}
+                key={slot}
+                variant="outline"
+                colorScheme="blue"
+                margin={"5px 3px"}
+              >
+                <TagLabel>{name}</TagLabel>
+              </Tag>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h6>Types</h6>
+          <div>
+            {types.map(({ type: { name }, slot }) => (
               <Tag
                 size={"md"}
                 key={slot}

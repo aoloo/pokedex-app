@@ -1,11 +1,10 @@
 import React from "react";
 
-//@Third party library
-import { Flex } from "@chakra-ui/react";
+//@dependencies
 import { Button } from "@chakra-ui/button";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { SimpleGrid, GridItem } from "@chakra-ui/react";
+import { SimpleGrid, GridItem, Container, Text } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 
 /**
@@ -17,7 +16,7 @@ const Layout = (props) => {
 
   return (
     <>
-      <SimpleGrid gap={4}>
+      <SimpleGrid>
         <GridItem>
           <Box>
             <Button
@@ -34,29 +33,22 @@ const Layout = (props) => {
             </Button>
           </Box>
         </GridItem>
-        <GridItem alignItems="center">
-          <Flex
-            display="block"
-            margin="auto"
-            flexDirection="column"
-            justifyContent="center"
-            width={"450px"}
-          >
-            <Box>{props.renderSearch()}</Box>
-          </Flex>
-        </GridItem>
-        <GridItem alignItems="center">
-          <Flex
-            display="block"
-            margin="auto"
-            flexDirection="column"
-            justifyContent="center"
-            width={"450px"}
-          >
-            <Box>{props.renderCard()}</Box>
-          </Flex>
-        </GridItem>
       </SimpleGrid>
+      <Container marginTop={"40px"}>
+        <Text
+          textAlign="center"
+          fontWeight={700}
+          margin={"20px"}
+          fontSize="30px"
+          stroke="black"
+          color="black.500"
+          outline="blue"
+        >
+          Pokemon Card
+        </Text>
+        <Box> {props.renderSearch()}</Box>
+        <Box marginTop={"50px"}>{props.renderCard()}</Box>
+      </Container>
     </>
   );
 };
