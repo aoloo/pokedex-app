@@ -38,6 +38,12 @@ A pokemon search based application for viewing pokemon characters. Users are abl
     |-App.js
     |-index.js
 
+### Features 
+- Search pokemon by name or number.
+- Save pokemon card.
+- Delete pokemon card.
+- Light & dark theme mode.
+
 ### Demo
 http://aoloo.github.io/pokedex-app
 
