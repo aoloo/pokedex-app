@@ -1,4 +1,4 @@
-# Pokedex Cards
+# Pokemon Cards
 A pokemon search based application for viewing pokemon characters. Users are able to save and delete their favorite pokemon cards.
 
 ### Framework
