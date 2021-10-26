@@ -39,6 +39,7 @@ A pokemon search based application for viewing pokemon characters. Users are abl
     |-index.js
 
 ### Demo
+http://aoloo.github.io/pokedex-app
 
 ### Running Locally
 
