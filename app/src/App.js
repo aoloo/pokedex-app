@@ -16,7 +16,7 @@ import ResultNotFound from "./components/Display/ResultNotFound";
 
 function App() {
   const [searchString, setSearchString] = useState("");
-  const [searchResults, setSearchResults] = useState({});
+  const [searchResult, setSearchResult] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [savedPokemons, setSavedPokemons] = useState(
@@ -25,12 +25,17 @@ function App() {
 
   useEffect(() => {
     const getPokeDexData = async (searchString) => {
+      searchString =
+        typeof searchString === "string"
+          ? searchString.toLowerCase()
+          : searchString;
+
       setIsLoading(true);
 
       const results = await fetchData(
         `https://pokeapi.co/api/v2/pokemon/${searchString}?limit=10`
       );
-      setSearchResults(results);
+      setSearchResult(results);
       setIsLoading(false);
     };
 
@@ -47,7 +52,7 @@ function App() {
         setSearchString(searchValue);
       } else {
         setSearchString("");
-        setSearchResults([]);
+        setSearchResult([]);
       }
     }, 1000),
     []
@@ -60,7 +65,6 @@ function App() {
     onOpen();
   };
 
-  console.log("render", "APP");
   return (
     <>
       <Layout
@@ -95,15 +99,15 @@ function App() {
           isLoading ? (
             <Skeleton h={300} />
           ) : !isLoading &&
-            Object.keys(searchResults).length > 0 &&
-            !searchResults.hasOwnProperty("text") ? (
+            Object.keys(searchResult).length > 0 &&
+            !searchResult.hasOwnProperty("text") ? (
             <PokemonCard
-              pokemon={searchResults}
+              pokemon={searchResult}
               savedPokemons={savedPokemons}
               setSavedPokemons={setSavedPokemons}
               view={"default"}
             />
-          ) : searchString && searchResults.text === "not found" ? (
+          ) : searchString && searchResult.text === "not found" ? (
             <ResultNotFound />
           ) : null
         }
