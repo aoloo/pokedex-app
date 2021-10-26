@@ -75,7 +75,7 @@ function App() {
                   as="u"
                   paddingRight="8px"
                   cursor="pointer"
-                  color="blue"
+                  color="#8080c1"
                   float="right"
                   onClick={handleClick}
                 >
