@@ -30,7 +30,7 @@ const Search = ({ debouncedSearch }) => {
           children={<SearchIcon verticalAlign="middle" marginTop="10px" />}
         />
         <Input
-          placeholder="Search by name or number"
+          placeholder="Search by pokemon name or number"
           size="lg"
           value={value}
           onChange={handleSearchChange}
