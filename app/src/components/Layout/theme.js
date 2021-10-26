@@ -10,6 +10,6 @@ const config = {
  * Application custom theming config
  * @param  {} {config}
  */
-const theme = extendTheme({ config });
+const Theme = extendTheme({ config });
 
-export default theme;
+export default Theme;
