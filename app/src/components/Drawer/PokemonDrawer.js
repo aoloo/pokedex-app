@@ -16,8 +16,6 @@ import PokemonCard from "../Card/PokemonCard";
 //Renders saved pokemon cards
 const PokemonDrawer = memo(
   ({ isOpen, onClose, savedPokemons, setSavedPokemons }) => {
-    console.log("RESULTS", savedPokemons);
-
     return (
       <>
         <Drawer isOpen={isOpen} placement="left" onClose={onClose}>

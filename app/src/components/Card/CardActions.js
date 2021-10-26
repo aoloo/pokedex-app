@@ -13,7 +13,6 @@ export default memo(function CardActions({
   view,
 }) {
   const { id, abilities, name, sprites, types } = pokemon;
-
   return (
     <>
       {view === "default" ? (

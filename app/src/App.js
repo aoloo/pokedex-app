@@ -61,9 +61,7 @@ function App() {
   /**
    * Drawer click event listener.
    */
-  const handleClick = () => {
-    onOpen();
-  };
+  const handleClick = useCallback(() => onOpen(), []);
 
   return (
     <>

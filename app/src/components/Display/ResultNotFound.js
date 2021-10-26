@@ -23,7 +23,7 @@ const ResultNotFound = () => {
   return (
     <Container>
       <p>
-        Details Not Found <span>&#128532;</span>
+        Pokemon Not Found <span>&#128532;</span>
       </p>
     </Container>
   );
