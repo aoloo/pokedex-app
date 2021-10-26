@@ -25,6 +25,11 @@ function App() {
 
   useEffect(() => {
     const getPokeDexData = async (searchString) => {
+      searchString =
+        typeof searchString === "string"
+          ? searchString.toLowerCase()
+          : searchString;
+
       setIsLoading(true);
 
       const results = await fetchData(
@@ -60,7 +65,6 @@ function App() {
     onOpen();
   };
 
-  console.log("render", "APP");
   return (
     <>
       <Layout
