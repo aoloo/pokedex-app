@@ -54,5 +54,4 @@ http://aoloo.github.io/pokedex-app
 - `npm run start`
 
 ### Authors
-
 Allan Oloo
