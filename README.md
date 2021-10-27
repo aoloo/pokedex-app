@@ -55,4 +55,4 @@ http://aoloo.github.io/pokedex-app
 
 ### Authors
 
-- Allan Oloo
+Allan Oloo
